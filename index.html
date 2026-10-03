@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2f1eb">
+  <title>Signal Club | Event desk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Signal Club home">
+        <span class="brand-mark" aria-hidden="true">S<span>.</span></span>
+        <span>SIGNAL<span class="brand-light"> / CLUB</span></span>
+      </a>
+      <div class="topbar-meta"><span class="live-dot"></span> STUDENT TECH COMMUNITY <span class="meta-divider">/</span> CAMPUS 01</div>
+      <a class="topbar-link" href="#create">HOST AN EVENT <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <img class="hero-image" src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1800&q=85" alt="Students collaborating around a table at a campus event">
+        <div class="hero-shade"></div>
+        <div class="hero-content">
+          <p class="eyebrow"><span>FIELD NOTES</span> <span class="eyebrow-line"></span> FALL / WINTER 2026</p>
+          <h1 id="hero-title">Make room<br>for <em>what's next.</em></h1>
+          <p class="hero-copy">Good people, curious minds, and technology worth getting together for.</p>
+          <a class="hero-cta" href="#events">EXPLORE THE CALENDAR <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero-stamp"><span>BUILD</span><span>LEARN</span><span>REPEAT</span></div>
+        <div class="hero-index">SC—26 <span>·</span> EVENTS & GATHERINGS</div>
+      </section>
+
+      <section class="events-section" id="events" aria-labelledby="events-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow section-eyebrow">THE CLUB CALENDAR <span class="eyebrow-line"></span> OPEN TO ALL</p>
+            <h2 id="events-title">Coming up<span class="heading-period">.</span></h2>
+          </div>
+          <p class="section-note"><span id="event-count">0</span> UPCOMING SESSIONS<br>GOOD IDEAS WELCOME</p>
+        </div>
+        <div id="event-list" class="event-grid" aria-live="polite"></div>
+        <div id="empty-state" class="empty-state" hidden>
+          <span class="empty-symbol" aria-hidden="true">✳</span>
+          <h3>Nothing on the board. Yet.</h3>
+          <p>Start the next good thing by adding an event below.</p>
+          <a href="#create">ADD THE FIRST EVENT <span aria-hidden="true">↓</span></a>
+        </div>
+      </section>
+
+      <section class="create-section" id="create" aria-labelledby="create-title">
+        <div class="create-intro">
+          <p class="eyebrow"><span>YOUR TURN</span> <span class="eyebrow-line"></span> MAKE IT HAPPEN</p>
+          <h2 id="create-title">Put it<br>on the <em>board.</em></h2>
+          <p>Have a workshop, talk, or wonderfully nerdy idea? Give it a date and bring people together.</p>
+          <div class="create-aside"><span class="aside-mark">+</span> COMMUNITY-LED, ALWAYS.</div>
+        </div>
+        <form id="event-form" class="event-form">
+          <div class="form-topline"><span>NEW EVENT</span><span>01 — 03</span></div>
+          <label for="event-title">EVENT TITLE <span>*</span></label>
+          <input id="event-title" name="title" type="text" maxlength="80" placeholder="e.g. Build a tiny robot" required>
+
+          <label for="event-date">DATE <span>*</span></label>
+          <input id="event-date" name="date" type="date" required>
+
+          <label for="event-description">THE DETAILS <span>*</span></label>
+          <textarea id="event-description" name="description" rows="3" maxlength="400" placeholder="What are we making, learning, or figuring out?" required></textarea>
+
+          <div class="form-footer">
+            <p>Keep it curious. Keep it welcoming.</p>
+            <button class="submit-button" type="submit">ADD TO CALENDAR <span aria-hidden="true">↗</span></button>
+          </div>
+          <p class="form-message" id="form-message" role="status"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true">S<span>.</span></span><span>SIGNAL<span class="brand-light"> / CLUB</span></span></a>
+      <span>MADE BY THE CLUB, FOR THE CURIOUS.</span>
+      <a href="#top">BACK TO TOP ↑</a>
+    </footer>
+  </div>
+</body>
+</html>
