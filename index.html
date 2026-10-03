@@ -44,12 +44,45 @@
           </div>
           <p class="section-note"><span id="event-count">0</span> UPCOMING SESSIONS<br>GOOD IDEAS WELCOME</p>
         </div>
+        <div class="event-tools">
+          <label class="search-field" for="event-search">SEARCH THE CALENDAR
+            <input id="event-search" type="search" placeholder="Title, details, or location">
+          </label>
+          <label class="filter-field" for="event-category-filter">TOPIC
+            <select id="event-category-filter">
+              <option value="all">ALL TOPICS</option>
+              <option value="workshop">WORKSHOP</option>
+              <option value="talk">TALK</option>
+              <option value="hardware">HARDWARE</option>
+              <option value="social">SOCIAL</option>
+              <option value="other">OTHER</option>
+            </select>
+          </label>
+        </div>
         <div id="event-list" class="event-grid" aria-live="polite"></div>
         <div id="empty-state" class="empty-state" hidden>
           <span class="empty-symbol" aria-hidden="true">✳</span>
           <h3>Nothing on the board. Yet.</h3>
           <p>Start the next good thing by adding an event below.</p>
           <a href="#create">ADD THE FIRST EVENT <span aria-hidden="true">↓</span></a>
+        </div>
+        <p id="no-results" class="no-results" hidden>No events match those filters. Try another search or topic.</p>
+      </section>
+
+      <section class="registered-section" id="registered" aria-labelledby="registered-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow section-eyebrow">YOUR SAVED SEATS <span class="eyebrow-line"></span> SEE YOU THERE</p>
+            <h2 id="registered-title">You're going<span class="heading-period">.</span></h2>
+          </div>
+          <p class="section-note"><span id="registered-count">00</span> EVENTS YOU'VE JOINED<br>STORED IN THIS BROWSER</p>
+        </div>
+        <div id="registered-list" class="registered-list" aria-live="polite"></div>
+        <p id="registration-feedback" class="registration-feedback" role="status" aria-live="polite"></p>
+        <div id="registered-empty" class="registered-empty">
+          <span aria-hidden="true">↗</span>
+          <p>Your sign-ups will show up here after you join an event.</p>
+          <a href="#events">FIND AN EVENT ↑</a>
         </div>
       </section>
 
@@ -61,19 +94,46 @@
           <div class="create-aside"><span class="aside-mark">+</span> COMMUNITY-LED, ALWAYS.</div>
         </div>
         <form id="event-form" class="event-form">
-          <div class="form-topline"><span>NEW EVENT</span><span>01 — 03</span></div>
+          <div class="form-topline"><span id="event-form-heading">NEW EVENT</span><span>01 — 06</span></div>
+          <input id="event-id" name="id" type="hidden">
           <label for="event-title">EVENT TITLE <span>*</span></label>
           <input id="event-title" name="title" type="text" maxlength="80" placeholder="e.g. Build a tiny robot" required>
 
+          <label for="event-category">TOPIC <span>*</span></label>
+          <select id="event-category" name="category" required>
+            <option value="workshop">Workshop</option>
+            <option value="talk">Talk</option>
+            <option value="hardware">Hardware</option>
+            <option value="social">Social</option>
+            <option value="other">Other</option>
+          </select>
+
           <label for="event-date">DATE <span>*</span></label>
           <input id="event-date" name="date" type="date" required>
+
+          <div class="form-row">
+            <div>
+              <label for="event-time">START TIME</label>
+              <input id="event-time" name="time" type="time">
+            </div>
+            <div>
+              <label for="event-location">LOCATION</label>
+              <input id="event-location" name="location" type="text" maxlength="100" placeholder="Room or meeting link">
+            </div>
+          </div>
+
+          <label for="event-capacity">CAPACITY <span class="optional-label">OPTIONAL</span></label>
+          <input id="event-capacity" name="capacity" type="number" min="1" max="500" step="1" placeholder="Leave blank for no limit">
 
           <label for="event-description">THE DETAILS <span>*</span></label>
           <textarea id="event-description" name="description" rows="3" maxlength="400" placeholder="What are we making, learning, or figuring out?" required></textarea>
 
           <div class="form-footer">
             <p>Keep it curious. Keep it welcoming.</p>
-            <button class="submit-button" type="submit">ADD TO CALENDAR <span aria-hidden="true">↗</span></button>
+            <div class="form-actions">
+              <button id="cancel-edit" class="cancel-edit" type="button" hidden>CANCEL EDIT</button>
+              <button id="event-submit" class="submit-button" type="submit">ADD TO CALENDAR <span aria-hidden="true">↗</span></button>
+            </div>
           </div>
           <p class="form-message" id="form-message" role="status"></p>
         </form>
