@@ -3,8 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f2f1eb">
+  <meta name="theme-color" content="#090b0e">
   <title>Signal Club | Event desk</title>
+  <script>
+    try {
+      document.documentElement.dataset.theme = localStorage.getItem("signal-club-theme") === "light" ? "light" : "dark";
+    } catch {
+      document.documentElement.dataset.theme = "dark";
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,6 +32,11 @@
       </nav>
       <div class="topbar-actions">
         <button class="nav-search" id="nav-search" type="button" aria-label="Search events" title="Search events"><span class="search-icon" aria-hidden="true"></span></button>
+        <button id="theme-toggle" class="theme-toggle" type="button" role="switch" aria-label="Dark mode" aria-checked="true" title="Switch to light mode">
+          <span class="theme-symbol theme-sun" aria-hidden="true">☀</span>
+          <span class="theme-symbol theme-moon" aria-hidden="true">☾</span>
+          <span class="theme-thumb" aria-hidden="true"></span>
+        </button>
         <a class="topbar-link" href="#create"><span class="host-plus" aria-hidden="true">+</span> HOST EVENT</a>
       </div>
     </header>

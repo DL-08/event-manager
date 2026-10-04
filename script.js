@@ -1,6 +1,9 @@
 const STORAGE_KEY = "signal-club-events-v1";
 const ATTENDEE_KEY = "signal-club-attendee-email-v1";
+const THEME_KEY = "signal-club-theme";
 
+const themeToggle = document.querySelector("#theme-toggle");
+const themeColorMeta = document.querySelector('meta[name="theme-color"]');
 const eventList = document.querySelector("#event-list");
 const registeredList = document.querySelector("#registered-list");
 const heroUpNextList = document.querySelector("#hero-up-next-list");
@@ -38,6 +41,26 @@ const categoryArtwork = {
   social: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=85",
   other: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=85"
 };
+
+function applyTheme(theme, persist = true) {
+  const activeTheme = theme === "light" ? "light" : "dark";
+  const isDark = activeTheme === "dark";
+  document.documentElement.dataset.theme = activeTheme;
+  themeToggle.setAttribute("aria-checked", String(isDark));
+  themeToggle.title = isDark ? "Switch to light mode" : "Switch to dark mode";
+  themeColorMeta.content = isDark ? "#090b0e" : "#eef1f5";
+  if (persist) {
+    try {
+      localStorage.setItem(THEME_KEY, activeTheme);
+    } catch {
+      return;
+    }
+  }
+}
+
+themeToggle.addEventListener("click", () => {
+  applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+});
 
 function loadAttendeeEmail() {
   try {
