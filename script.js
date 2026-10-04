@@ -3,6 +3,7 @@ const ATTENDEE_KEY = "signal-club-attendee-email-v1";
 
 const eventList = document.querySelector("#event-list");
 const registeredList = document.querySelector("#registered-list");
+const heroUpNextList = document.querySelector("#hero-up-next-list");
 const eventForm = document.querySelector("#event-form");
 const eventIdInput = document.querySelector("#event-id");
 const dateInput = document.querySelector("#event-date");
@@ -18,6 +19,9 @@ const registrationFeedback = document.querySelector("#registration-feedback");
 const eventFormHeading = document.querySelector("#event-form-heading");
 const eventSubmit = document.querySelector("#event-submit");
 const cancelEditButton = document.querySelector("#cancel-edit");
+const eventRail = document.querySelector("#event-list");
+const eventRailPrev = document.querySelector("#event-rail-prev");
+const eventRailNext = document.querySelector("#event-rail-next");
 
 const categoryLabels = {
   workshop: "WORKSHOP",
@@ -25,6 +29,14 @@ const categoryLabels = {
   hardware: "HARDWARE",
   social: "SOCIAL",
   other: "OTHER"
+};
+
+const categoryArtwork = {
+  workshop: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=85",
+  talk: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=900&q=85",
+  hardware: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=85",
+  social: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=85",
+  other: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=85"
 };
 
 function loadAttendeeEmail() {
@@ -152,6 +164,13 @@ function buildEventCard(event, index) {
 
   const head = document.createElement("div");
   head.className = "event-card-head";
+  const artwork = document.createElement("img");
+  artwork.className = "event-artwork";
+  artwork.src = categoryArtwork[event.category] || categoryArtwork.other;
+  artwork.alt = "";
+  artwork.loading = "lazy";
+  head.append(artwork);
+  head.append(createTextElement("span", "poster-rank", String(index + 1).padStart(2, "0")));
   head.append(createTextElement("span", "event-number", `SESSION / ${String(index + 1).padStart(2, "0")}`));
 
   const dateBadge = document.createElement("time");
@@ -161,6 +180,7 @@ function buildEventCard(event, index) {
     createTextElement("strong", "", formatDate(event.date, { day: "2-digit" })),
     createTextElement("span", "", formatDate(event.date, { month: "short" }).toUpperCase())
   );
+  head.append(createTextElement("span", "poster-category", categoryLabels[event.category] || categoryLabels.other));
   head.append(dateBadge);
 
   const body = document.createElement("div");
@@ -287,6 +307,30 @@ function renderEvents() {
   );
 
   eventList.replaceChildren(...visibleEvents.map(buildEventCard));
+  updateRailControls();
+  requestAnimationFrame(updateRailControls);
+  heroUpNextList.replaceChildren(...upcomingEvents.slice(0, 3).map((event) => {
+    const item = document.createElement("a");
+    item.className = "up-next-item";
+    item.href = `#event-${event.id}`;
+    const artwork = document.createElement("img");
+    artwork.src = categoryArtwork[event.category] || categoryArtwork.other;
+    artwork.alt = "";
+    artwork.loading = "lazy";
+    const details = document.createElement("span");
+    details.className = "up-next-copy";
+    details.append(
+      createTextElement("strong", "", event.title),
+      createTextElement("span", "", formatDate(event.date, { month: "short", day: "numeric" }))
+    );
+    item.append(artwork, details);
+    item.addEventListener("click", () => {
+      eventSearch.value = "";
+      categoryFilter.value = "all";
+      renderEvents();
+    });
+    return item;
+  }));
   registeredList.replaceChildren(...attendeeEvents.map((event) => {
     const item = document.createElement("article");
     item.className = "registered-event";
@@ -321,6 +365,12 @@ function renderEvents() {
   emptyState.hidden = upcomingEvents.length > 0;
   noResults.hidden = upcomingEvents.length === 0 || visibleEvents.length > 0;
   registeredEmpty.hidden = attendeeEvents.length > 0;
+}
+
+function updateRailControls() {
+  const maxScroll = eventRail.scrollWidth - eventRail.clientWidth;
+  eventRailPrev.disabled = maxScroll <= 1 || eventRail.scrollLeft <= 1;
+  eventRailNext.disabled = maxScroll <= 1 || eventRail.scrollLeft >= maxScroll - 1;
 }
 
 function startEventEdit(event) {
@@ -368,6 +418,19 @@ dateInput.min = localDateString(new Date());
 eventSearch.addEventListener("input", renderEvents);
 categoryFilter.addEventListener("change", renderEvents);
 cancelEditButton.addEventListener("click", resetEventForm);
+document.querySelector("#nav-search").addEventListener("click", () => {
+  document.querySelector("#events").scrollIntoView({ behavior: "smooth", block: "start" });
+  eventSearch.focus({ preventScroll: true });
+});
+eventRailPrev.addEventListener("click", () => {
+  eventRail.scrollBy({ left: -eventRail.clientWidth * 0.78, behavior: "smooth" });
+});
+eventRailNext.addEventListener("click", () => {
+  eventRail.scrollBy({ left: eventRail.clientWidth * 0.78, behavior: "smooth" });
+});
+eventRail.addEventListener("scroll", updateRailControls, { passive: true });
+window.addEventListener("resize", () => requestAnimationFrame(updateRailControls));
+new ResizeObserver(updateRailControls).observe(eventRail);
 
 eventForm.addEventListener("submit", (submitEvent) => {
   submitEvent.preventDefault();

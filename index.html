@@ -18,8 +18,15 @@
         <span class="brand-mark" aria-hidden="true">S<span>.</span></span>
         <span>SIGNAL<span class="brand-light"> / CLUB</span></span>
       </a>
-      <div class="topbar-meta"><span class="live-dot"></span> STUDENT TECH COMMUNITY <span class="meta-divider">/</span> CAMPUS 01</div>
-      <a class="topbar-link" href="#create">HOST AN EVENT <span aria-hidden="true">↗</span></a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-link" href="#top">Home</a>
+        <a class="nav-link is-active" href="#events">Events</a>
+        <a class="nav-link" href="#registered">My RSVPs</a>
+      </nav>
+      <div class="topbar-actions">
+        <button class="nav-search" id="nav-search" type="button" aria-label="Search events" title="Search events"><span class="search-icon" aria-hidden="true"></span></button>
+        <a class="topbar-link" href="#create"><span class="host-plus" aria-hidden="true">+</span> HOST EVENT</a>
+      </div>
     </header>
 
     <main id="top">
@@ -27,13 +34,17 @@
         <img class="hero-image" src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1800&q=85" alt="Students collaborating around a table at a campus event">
         <div class="hero-shade"></div>
         <div class="hero-content">
-          <p class="eyebrow"><span>FIELD NOTES</span> <span class="eyebrow-line"></span> FALL / WINTER 2026</p>
-          <h1 id="hero-title">Make room<br>for <em>what's next.</em></h1>
-          <p class="hero-copy">Good people, curious minds, and technology worth getting together for.</p>
-          <a class="hero-cta" href="#events">EXPLORE THE CALENDAR <span aria-hidden="true">↓</span></a>
+          <p class="eyebrow"><span>SIGNAL CLUB PRESENTS</span> <span class="eyebrow-line"></span> CAMPUS EVENT SERIES</p>
+          <h1 id="hero-title">The next<br><em>good thing.</em></h1>
+          <p class="hero-copy">Workshops, live talks, and curious people. Your next campus night starts here.</p>
+          <a class="hero-cta" href="#events">BROWSE EVENTS <span aria-hidden="true">↓</span></a>
         </div>
         <div class="hero-stamp"><span>BUILD</span><span>LEARN</span><span>REPEAT</span></div>
-        <div class="hero-index">SC—26 <span>·</span> EVENTS & GATHERINGS</div>
+        <div class="hero-index">SIGNAL / 01 <span>·</span> YOUR CAMPUS, AFTER HOURS</div>
+        <aside class="hero-up-next" aria-label="Upcoming events">
+          <p class="up-next-heading"><span class="up-next-indicator"></span> UP NEXT</p>
+          <div id="hero-up-next-list" class="up-next-list"></div>
+        </aside>
       </section>
 
       <section class="events-section" id="events" aria-labelledby="events-title">
@@ -42,7 +53,13 @@
             <p class="eyebrow section-eyebrow">THE CLUB CALENDAR <span class="eyebrow-line"></span> OPEN TO ALL</p>
             <h2 id="events-title">Coming up<span class="heading-period">.</span></h2>
           </div>
-          <p class="section-note"><span id="event-count">0</span> UPCOMING SESSIONS<br>GOOD IDEAS WELCOME</p>
+          <div class="section-side">
+            <p class="section-note"><span id="event-count">0</span> UPCOMING SESSIONS<br>GOOD IDEAS WELCOME</p>
+            <div class="rail-controls" aria-label="Browse events">
+              <button id="event-rail-prev" class="rail-control" type="button" aria-label="Previous events" title="Previous events">‹</button>
+              <button id="event-rail-next" class="rail-control" type="button" aria-label="Next events" title="Next events">›</button>
+            </div>
+          </div>
         </div>
         <div class="event-tools">
           <label class="search-field" for="event-search">SEARCH THE CALENDAR
