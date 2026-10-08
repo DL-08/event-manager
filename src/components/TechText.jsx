@@ -124,7 +124,18 @@ function createCanvasRenderer(root, settings) {
   }
   function wake() { if (!state.raf && state.visible && state.alive) state.raf = requestAnimationFrame(tick); }
   resize(); wake();
-  return () => { state.alive = false; cancelAnimationFrame(state.raf); resizeObserver.disconnect(); intersectionObserver.disconnect(); root.removeEventListener("pointermove", locate); root.removeEventListener("pointerdown", handlePointerDown); root.removeEventListener("pointerup", handlePointerUp); root.removeEventListener("pointercancel", handlePointerUp); root.removeEventListener("pointerleave", onPointerLeave); };
+  return () => {
+    state.alive = false;
+    cancelAnimationFrame(state.raf);
+    canvas.remove();
+    resizeObserver.disconnect();
+    intersectionObserver.disconnect();
+    root.removeEventListener("pointermove", locate);
+    root.removeEventListener("pointerdown", handlePointerDown);
+    root.removeEventListener("pointerup", handlePointerUp);
+    root.removeEventListener("pointercancel", handlePointerUp);
+    root.removeEventListener("pointerleave", onPointerLeave);
+  };
 }
 
 export default function TechText({ text, className = "", ...settings }) {
@@ -135,5 +146,5 @@ export default function TechText({ text, className = "", ...settings }) {
     const cleanup = createCanvasRenderer(rootRef.current, { text, fontFamily: "Space Grotesk, sans-serif", fontWeight: 600, fontSize: 118, letterSpacing: -0.06, color: "#f4f3ef", accentColor: "#c5f36b", reveal: "letter", reach: 180, softness: 0.7, dashLength: 5, dashGap: 3, strokeWidth: 1.25, lineStyle: "dashed", specks: 14, selection: true, labels: true, draggable: true, sweep: true, speed: 1, ...settings });
     return cleanup;
   }, [text, settingsKey]);
-  return <div ref={rootRef} className={`tech-text-host ${className}`} aria-label={`${text} animated wordmark`} role="img" />;
+  return <span ref={rootRef} className={`tech-text-host ${className}`} aria-label={`${text} animated wordmark`} role="img" />;
 }
