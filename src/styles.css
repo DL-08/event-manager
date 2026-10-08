@@ -351,35 +351,14 @@ html[data-theme="light"] .footer > span,
 html[data-theme="light"] .footer > a:last-child { color: #626b78; }
 html[data-theme="light"] .event-grid { scrollbar-color: #b7c0cc #e1e5eb; }
 
-.tech-text-host {
-  position: relative;
-  z-index: 2;
-  display: block;
-  width: 100%;
+/* React Bits TechText — hero heading container */
+.hero h1 .tech-text {
+  /* Override TechText.css height:100% so the h1 sizes from its own font-size */
   height: 0.95em;
-  min-height: 0;
-  overflow: hidden;
-  pointer-events: auto;
-  opacity: 0.9;
+  display: block;
   mix-blend-mode: screen;
-}
-.main-heading-tech-text {
-  display: block;
-  width: 100%;
-  height: 0.95em;
-  color: var(--paper);
-}
-.tech-text-host .tech-text {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  touch-action: pan-y;
-  user-select: none;
-}
-.tech-text-host .tech-text-canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
+  opacity: 0.9;
+  overflow: visible;
 }
 
 @keyframes rise-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
