@@ -111,6 +111,13 @@ html[data-theme="dark"] .theme-thumb { transform: translateX(20px); }
 .up-next-copy strong { overflow: hidden; font-size: 11px; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; }
 .up-next-copy > span { color: #a2a6ae; font-family: var(--mono); font-size: 8px; }
 .up-next-item:hover .up-next-copy strong { color: var(--acid); }
+.hero-up-next > div { display: grid; gap: 8px; }
+.hero-up-next > div > a { display: grid; grid-template-columns: 62px minmax(0, 1fr); align-items: center; gap: 11px; min-width: 0; color: white; }
+.hero-up-next > div > a > img { width: 62px; height: 43px; border-radius: 4px; object-fit: cover; }
+.hero-up-next > div > a > span { display: grid; gap: 4px; min-width: 0; }
+.hero-up-next > div > a > span > strong { overflow: hidden; font-size: 11px; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; }
+.hero-up-next > div > a > span > small { color: #a2a6ae; font-family: var(--mono); font-size: 8px; }
+.hero-up-next > div > a:hover > span > strong { color: var(--acid); }
 
 .events-section { padding: 76px 0 86px; }
 .registered-section { padding: 0 0 90px; }
